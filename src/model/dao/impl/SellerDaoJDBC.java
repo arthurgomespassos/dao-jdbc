@@ -88,9 +88,24 @@ public class SellerDaoJDBC implements SellerDao  {
 	}
 
 	@Override
-	public void deleteByIf(Integer id) {
-		// TODO Auto-generated method stub
+	public void deleteById(Integer id) {
+		PreparedStatement st = null;
 		
+		try {
+			st = conn.prepareStatement("DELETE from seller WHERE Id = ?");
+			st.setInt(1, id);
+			
+			int rowsAffected = st.executeUpdate();
+			// esse if abaixo é meio inútil, só fiz pra ter de consulta depois caso queira saber como verificar se um alteração ocorreu ou não
+			if (rowsAffected == 0) {
+				throw new DbException("Unexpected error! No rows affected!");	
+			}
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);
+		}
 	}
 
 	@Override
