@@ -28,7 +28,11 @@ public class Program2 {
 		System.out.println("---- TEST 4: department update ----");
 		department.setName("Tablets");
 		departmentDao.update(department);
-		System.out.println("Updated! New name = " + department.getName());
+		System.out.println("Update Completed");
+		
+		System.out.println("---- TEST 6: department deleteById ----");
+		departmentDao.deleteById(7);
+		System.out.println("Delete Completed");
 	}
 
 }
